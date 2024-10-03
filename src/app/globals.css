@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.container {
+  width: 1220px;
+  margin: 0 auto !important;
+}
+@media screen and (min-width: 1220px) {
+  .banner2 {
+    background: url("/images/6.png") no-repeat;
+    object-fit: cover;
+    text-align: -webkit-right !important;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .container {
+    width: 90%;
+  }
+}
+
+.banner {
+  background: url("/images/1_1.png") no-repeat;
+  object-fit: cover;
+} 
+.banner2 {
+  /* background: url("/images/6.png") no-repeat;
+  object-fit: cover;
+  text-align: -webkit-right; */
+  text-align: center;
+}
+
+img {
+  width: 100%;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 14px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.swiper-pagination {
+  position: relative !important;
+  margin-top: 35px;
+  transition: all 400ms cubic-bezier(0.4, 0.0, 0.2, 1) !important
+}
+.shadow-bottom-right {
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.select-container {
+  margin-bottom: 10px;
+}
+
+.swiper-pagination-bullet-active {
+  background: #4caf50 !important;
+}
+
+
+
+.accordion .accordion-item {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.accordion .accordion-item button[aria-expanded="true"] {
+  border-bottom: 1px solid #03b5d2;
+}
+
+.accordion button {
+  position: relative;
+  display: block;
+  text-align: left;
+  width: 100%;
+  padding: 10px 0;
+  color: #000;
+  font-size: 1.15rem;
+  font-weight: 400;
+  border: 10px;
+  border-color: #000;
+  background: white;
+  outline: none;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+/* .accordion button:hover, */
+.accordion button:focus {
+  cursor: pointer;
+  color: #fff;
+  background: #0eca5996;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.accordion button:hover {
+  color: #fff;
+  background: #0eca5996;
+}
+
+.accordion button:hover::after,
+.accordion button:focus::after {
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #000;
+  border-bottom-left-radius: 0px;
+}
+
+.accordion button .accordion-title {
+  /* padding: 1em 1.5em 1em 0; */
+}
+
+.accordion button .icon {
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid;
+  border-radius: 22px;
+}
+
+.accordion button .icon::before {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 9px;
+  left: 5px;
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+}
+.accordion button .icon::after {
+  display: block;
+  position: absolute;
+  content: "";
+  top: 5px;
+  left: 9px;
+  width: 2px;
+  height: 10px;
+  background: currentColor;
+}
+
+.accordion button[aria-expanded="true"] {
+  color: #fff;
+  background: #0eca5996;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.accordion button[aria-expanded="true"] .icon::after {
+  width: 0;
+}
+.accordion button[aria-expanded="true"] + .accordion-content {
+  opacity: 1;
+  max-height: 9em;
+  transition: all 200ms linear;
+  will-change: opacity, max-height;
+}
+.accordion .accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 200ms linear, max-height 200ms linear;
+  will-change: opacity, max-height;
+}
+.accordion .accordion-content p {
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 2px 20px;
+}
+
+.menu {
+  /* display: block; */
+  /* display: -webkit-box; */
+  list-style: none
+}
+
+/* @media screen and (max-width: 1220px) {
+  .menu { */
+    /* display: -webkit-box; */
+  /* }
+} */
+
+/* contact */
+.image {
+  transition: 500ms ease
+}
+
+.image:hover {
+  transform: scale(1.1);
+}
+.content-news {
+  line-height: 30px;
+}
+.content-news h2 {
+  line-height: 40px;
+  font-size: 28px;
+  font-weight: 600;
+}
+.content-news p {
+  font-size: 15px;
+  line-height: 30px;
+}
+
