@@ -32,7 +32,7 @@ interface TDataContacts {
 
 export default function HeaderPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [dataMenu, setDataMenu] = useState<MenuItem[]>([]);
+  const [dataMenu, setDataMenu] = useState<MenuItem[]>([]);
   const [dataContacts, setDataContacts] = useState<TDataContacts>({
     address: "",
     email: "",
@@ -48,7 +48,9 @@ export default function HeaderPage() {
   });
   const getData = async () => {
     try {
-      // const res = (await http.get<SuccessResponse<[]>>(`menu/getMenus`)).data;
+      const res = (
+        await http.get<SuccessResponse<[]>>(`menu/getMenus?publish=1&sort=1`)
+      ).data;
       const resContact = (await http.get<SuccessResponse<[]>>(`system`)).data;
 
       console.log("resContact", resContact);
@@ -63,10 +65,10 @@ export default function HeaderPage() {
 
       setDataContacts(data as TDataContacts);
 
-      // if (res.statusCode === 200) {
-      //   const mainMenu: MenuItem[] = res?.mainMenu || [];
-      //   setDataMenu(mainMenu);
-      // }
+      if (res.statusCode === 200) {
+        const mainMenu: MenuItem[] = res?.mainMenu || [];
+        setDataMenu(mainMenu);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -161,14 +163,14 @@ export default function HeaderPage() {
               </button>
             </div>
             <div className="ml-2 font-semibold">
-              {/* {dataMenu?.map((item: MenuItem, index) => (
+              {dataMenu?.map((item: MenuItem, index) => (
                 <li key={index} className="hover:text-greenCustom my-3 mx-2">
                   <Link className="ml-0 lg:ml-10" href={item?.link}>
                     {item?.name}
                   </Link>
                 </li>
-              ))} */}
-              <li
+              ))}
+              {/* <li
                 className="hover:text-greenCustom py-3 mx-2 border-t-[1px]"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
@@ -199,7 +201,7 @@ export default function HeaderPage() {
                 <Link className="ml-0 lg:ml-10" href="/lien-he">
                   Liên hệ
                 </Link>
-              </li>
+              </li> */}
             </div>
           </ul>
           {/* )} */}
@@ -216,39 +218,13 @@ export default function HeaderPage() {
           </Link>
         </div>
         <ul className="menu font-bold text-[16px] text-col hidden lg:flex lg:flex-row lg:text-left">
-          {/* {dataMenu?.map((item: MenuItem, index) => (
+          {dataMenu?.map((item: MenuItem, index) => (
             <li key={index} className="hover:text-greenCustom my-2">
               <Link className="ml-0 lg:ml-10" href={item?.link}>
                 {item?.name}
               </Link>
             </li>
-          ))} */}
-          <li className="hover:text-greenCustom my-2">
-            <Link className="ml-0 lg:ml-10" href="/">
-              Trang chủ
-            </Link>
-          </li>
-
-          <li className="hover:text-greenCustom my-2">
-            <Link className="ml-0 lg:ml-10" href="/ve-chung-toi">
-              Về chúng tôi
-            </Link>
-          </li>
-          <li className="hover:text-greenCustom my-2">
-            <Link className="ml-0 lg:ml-10" href="#">
-              Tin tức
-            </Link>
-          </li>
-          {/* <li className="hover:text-greenCustom my-2">
-            <Link className="ml-0 lg:ml-10" href="#">
-              Sản phẩm
-            </Link>
-          </li> */}
-          <li className="hover:text-greenCustom my-2">
-            <Link className="ml-0 lg:ml-10" href="/lien-he">
-              Liên hệ
-            </Link>
-          </li>
+          ))}
         </ul>
       </div>
     </header>

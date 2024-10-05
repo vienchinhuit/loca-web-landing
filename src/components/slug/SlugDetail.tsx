@@ -13,10 +13,12 @@ interface TData {
   des: string;
   image: string;
   specification: string;
+  content: string;
 }
 
 interface TContent {
   title: string;
+  heading: string;
   description: string;
   content: string;
 }
@@ -27,9 +29,11 @@ function SlugDetail({ slug }: { slug: string }) {
     des: "",
     image: "",
     specification: "",
+    content: "",
   } as TData);
   const [content, setContent] = useState({
     title: "",
+    heading: "",
     description: "",
     content: "",
   } as TContent);
@@ -40,7 +44,7 @@ function SlugDetail({ slug }: { slug: string }) {
   const getAllNews = async () => {
     try {
       const res = (
-        await http.get<SuccessResponse<[]>>("news/getAll?limit=3&&?publish=1")
+        await http.get<SuccessResponse<[]>>(`news/findRelated/${slug}`)
       ).data;
 
       if (res.statusCode === 200) {
@@ -53,8 +57,9 @@ function SlugDetail({ slug }: { slug: string }) {
 
   const getAll = async () => {
     try {
-      const res = (await http.get<SuccessResponse<[]>>("product?publish=1"))
-        .data;
+      const res = (
+        await http.get<SuccessResponse<[]>>(`product/findRelated/${slug}`)
+      ).data;
 
       if (res.statusCode === 200) {
         setProducts(res.data);
@@ -69,15 +74,15 @@ function SlugDetail({ slug }: { slug: string }) {
       const res = (
         await http.get<SuccessResponse<[]>>(`product/findBySlug/${slug}`)
       ).data;
+      if (res.statusCode === 200) {
+        return setData(res.data as unknown as TData);
+      }
+
       const ress = (
         await http.get<SuccessResponse<[]>>(`news/get-one-by-slug/${slug}`)
       ).data;
-
       if (ress.statusCode === 200) {
-        setContent(ress.data as unknown as TContent);
-      }
-      if (res.statusCode === 200) {
-        setData(res.data as unknown as TData);
+        return setContent(ress.data as unknown as TContent);
       }
     } catch (error) {
       console.log(error);
@@ -92,9 +97,6 @@ function SlugDetail({ slug }: { slug: string }) {
   useEffect(() => {
     getDetail(slug);
   }, [slug]);
-
-  console.log("data", data);
-  console.log("content", content);
 
   if (!data?.name && !content?.title) {
     return <Loading />;
@@ -116,10 +118,6 @@ function SlugDetail({ slug }: { slug: string }) {
             <h1 className="md:text-2xl text-md font-medium mx-auto">
               {data?.name}
             </h1>
-            {/* <div className="flex gap-10 text-4xl font-medium">
-            <p className="text-red-500"> 1.500.000đ </p>
-            <p className="line-through opacity-20"> 2.000.000đ </p>
-          </div> */}
           </div>
         </div>
         <div>
@@ -158,7 +156,9 @@ function SlugDetail({ slug }: { slug: string }) {
             <div className="">
               {activeTab === "info" ? (
                 <div className="gap-6 flex-col flex md:text-lg text-sm">
-                  <div dangerouslySetInnerHTML={{ __html: data?.des }}></div>
+                  <div
+                    dangerouslySetInnerHTML={{ __html: data?.content }}
+                  ></div>
                 </div>
               ) : (
                 <div className="gap-6 flex-col flex md:text-lg text-sm">
@@ -239,7 +239,7 @@ function SlugDetail({ slug }: { slug: string }) {
       <div>
         <div className="flex flex-col gap-3 mb-5">
           <h1 className="text-[18px] font-bold text-greenDarkCustom">
-            {content?.title}
+            {content?.heading}
           </h1>
           <p className="py-3 border-y-2 text-[15px] ">{content?.description}</p>
         </div>
@@ -255,7 +255,7 @@ function SlugDetail({ slug }: { slug: string }) {
                 item: {
                   slug: string;
                   image_url: string;
-                  title: string;
+                  heading: string;
                   description: string;
                 },
                 index
@@ -279,7 +279,7 @@ function SlugDetail({ slug }: { slug: string }) {
                     <div className="overflow-hidden px-5 py-3">
                       <a className="text-greenDarkCustom font-bold" href="#">
                         <h3 className="text-[22px] hover:text-green-700 line-clamp-1">
-                          {item?.title}
+                          {item?.heading}
                         </h3>
                       </a>
                       <div className="mt-5">

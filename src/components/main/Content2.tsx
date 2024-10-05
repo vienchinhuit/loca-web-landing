@@ -15,7 +15,9 @@ export default function Content2({ dataTitle }: Props) {
 
   const getAll = async () => {
     try {
-      const res = (await http.get<SuccessResponse<[]>>("partner")).data;
+      const res = (
+        await http.get<SuccessResponse<[]>>("partner?publish=1&sort=1")
+      ).data;
 
       if (res.statusCode === 200) {
         setData(res.data);

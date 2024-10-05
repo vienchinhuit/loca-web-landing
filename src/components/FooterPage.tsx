@@ -17,6 +17,15 @@ interface TDataContacts {
   phone: number;
   tax_code: number;
   thumb: string;
+  google_map: string;
+}
+interface TMenuFooter {
+  name: string;
+  link: string;
+}
+interface MenuItem {
+  name: string;
+  children: TMenuFooter[] | undefined;
 }
 
 export default function FooterPage() {
@@ -32,18 +41,31 @@ export default function FooterPage() {
     phone: 0,
     tax_code: 0,
     thumb: "",
+    google_map: "",
   });
   const [copyright, setCopyright] = useState<string | undefined>("");
+  const [dataMenu, setDataMenu] = useState<MenuItem[]>([]);
+  const [googleMapFooter, setGoogleMapFooter] = useState<string | undefined>(
+    ""
+  );
 
   const getData = async () => {
     try {
-      const res = (await http.get<SuccessResponse<[]>>(`menu/getMenus`)).data;
+      const res = (
+        await http.get<SuccessResponse<[]>>(`menu/getMenus?publish=1&sort=1`)
+      ).data;
       const resContact = (await http.get<SuccessResponse<[]>>(`system`)).data;
       const resGeneral = (
         await http.get<SuccessResponse<TBanner<DataContent>[]>>(
           "system?key=GENERAL_INFO"
         )
       ).data.data[0];
+      const resGGMapBrand = (
+        await http.get<SuccessResponse<TBanner<DataContent>[]>>(
+          "system?key=CONTACT"
+        )
+      ).data;
+      setGoogleMapFooter(resGGMapBrand?.data[0].content?.google_map_footer);
 
       setCopyright(resGeneral?.content?.copyright);
 
@@ -57,14 +79,10 @@ export default function FooterPage() {
 
       setDataContacts(data as TDataContacts);
 
-      console.log("res", res);
-
-      // setDataContacts(data as TDataContacts);
-
-      // if (res.statusCode === 200) {
-      //   const mainMenu: MenuItem[] = res?.mainMenu || [];
-      //   setDataMenu(mainMenu);
-      // }
+      if (res.statusCode === 200) {
+        const footerMenu: MenuItem[] = res?.footerMenu || [];
+        setDataMenu(footerMenu);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -72,6 +90,7 @@ export default function FooterPage() {
   useEffect(() => {
     getData();
   }, []);
+
   // const res = await http.get<SuccessResponse<BannerType<DataContent>[]>>(
   //   "system"
   // );
@@ -102,44 +121,34 @@ export default function FooterPage() {
             <li className="my-1">SĐT: {dataContacts?.phone}</li>
             <li className="my-1">Email: {dataContacts?.email}</li>
           </ul>
-          <ul className="lg:col-span-1 lg:mt-12 md:col-span-1 md:mt-12 mt-5">
-            <li className="my-1">
-              <div className="font-bold text-[15px]">PHÂN TRANG</div>
-            </li>
-            <li className="my-1 hover:text-gray-300">
-              <Link href="/">Trang chủ</Link>
-            </li>
-            <li className="my-1 hover:text-gray-300">
-              <Link href="/ve-chung-toi">Về chúng tôi</Link>
-            </li>
-            <li className="my-1 hover:text-gray-300">
-              <Link href="/lien-he">Liên hệ</Link>
-            </li>
-          </ul>
-          <ul className="lg:col-span-1 lg:mt-12 md:col-span-1 md:mt-12 mt-5">
-            <li className="my-1">
-              <div className="font-bold text-[15px]">CHÍNH SÁCH</div>
-            </li>
-            <li className="my-1 hover:text-gray-300">
-              <a href="#" className="my-1">
-                Chính sách bán hàng
-              </a>
-            </li>
-            <li className="my-1 hover:text-gray-300">
-              <a href="#" className="my-1">
-                Chính sách hợp tác
-              </a>
-            </li>
-          </ul>
+          {dataMenu?.map((item, index) => (
+            <ul
+              key={index}
+              className="lg:col-span-1 lg:mt-12 md:col-span-1 md:mt-12 mt-5"
+            >
+              <li className="my-1">
+                <div className="font-bold text-[15px]">{item?.name}</div>
+              </li>
+              {item?.children?.map((it, id) => (
+                <li key={id} className="my-1 hover:text-gray-300">
+                  <Link href={it?.link || "#"}>{it?.name}</Link>
+                </li>
+              ))}
+            </ul>
+          ))}
           <div className="lg:col-span-2 md:col-span-2">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.602267507604!2d106.66621797570379!3d10.841718757984644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529aeecedb079%3A0x255246387c6277fc!2zNTQgSOG6u20gMjA4IMSQLiBT4buRIDksIEtEQyBDaXR5bGFuZCBQYXJrIEhpbGxzLCBHw7IgVuG6pXAsIEjhu5MgQ2jDrSBNaW5oIDcwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1725441211065!5m2!1svi!2s"
+            {/* {dataContacts?.google_map} */}
+            <div
+              dangerouslySetInnerHTML={{ __html: googleMapFooter as string }}
+            />
+            {/* <iframe
+              src={dataContacts?.google_map}
               className="w-full h-full mr-5 md:mt-0 mt-5"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            />
+            /> */}
           </div>
         </div>
         <div className="w-full h-[1px] bg-white" />

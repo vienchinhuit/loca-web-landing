@@ -18,7 +18,8 @@ function Products() {
   const [products, setProducts] = useState([]);
   const getAll = async () => {
     try {
-      const res = (await http.get<SuccessResponse<[]>>("product")).data;
+      const res = (await http.get<SuccessResponse<[]>>("product?publish=1"))
+        .data;
 
       if (res.statusCode === 200) {
         setProducts(res.data);

@@ -1,5 +1,5 @@
 "use client";
-import { DataContent, SuccessResponse } from "@/types/type";
+import { DataContent, SuccessResponse, TBanner } from "@/types/type";
 import { http } from "@/utils/http";
 import React, { useEffect, useState } from "react";
 interface TItem {
@@ -13,10 +13,18 @@ interface Props {
 export default function System({ dataTitle }: Props) {
   const [data, setData] = useState([]);
   const [id, setId] = useState(1 as number);
+  const [googleMapBrand, setGoogleMapBrand] = useState<string | undefined>("");
 
   const getAll = async () => {
     try {
-      const res = (await http.get<SuccessResponse<[]>>("branch")).data;
+      const res = (await http.get<SuccessResponse<[]>>("branch?sort=1")).data;
+      const resGGMapBrand = (
+        await http.get<SuccessResponse<TBanner<DataContent>[]>>(
+          "system?key=CONTACT"
+        )
+      ).data;
+
+      setGoogleMapBrand(resGGMapBrand?.data[0].content?.google_map_branch);
 
       if (res.statusCode === 200) {
         setData(res.data);
@@ -120,14 +128,19 @@ export default function System({ dataTitle }: Props) {
             </div>
           </div>
           <div className="lg:col-span-1">
-            <iframe
+            <div
+              dangerouslySetInnerHTML={{
+                __html: googleMapBrand as string,
+              }}
+            />
+            {/* <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.602267507604!2d106.66621797570379!3d10.841718757984644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529aeecedb079%3A0x255246387c6277fc!2zNTQgSOG6u20gMjA4IMSQLiBT4buRIDksIEtEQyBDaXR5bGFuZCBQYXJrIEhpbGxzLCBHw7IgVuG6pXAsIEjhu5MgQ2jDrSBNaW5oIDcwMDAwLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1725441211065!5m2!1svi!2s"
               className="h-[350px] w-full"
-              style={{ border: 0 }}
+              style="width:100%, height:350px"
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            />
+            /> */}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 
 interface TItem {
   description: string;
-  title: string;
+  heading: string;
   content: string;
   image_url: string;
   slug: string;
@@ -22,8 +22,9 @@ export default function News({ dataTitle }: Props) {
 
   const getAll = async () => {
     try {
-      const res = (await http.get<SuccessResponse<[]>>("news/getAll?limit=3"))
-        .data;
+      const res = (
+        await http.get<SuccessResponse<[]>>("news/getAll?limit=3&publish=1")
+      ).data;
 
       if (res.statusCode === 200) {
         setData(res.data);
@@ -61,7 +62,7 @@ export default function News({ dataTitle }: Props) {
                 <div className="overflow-hidden px-5 py-3">
                   <a className="text-greenDarkCustom font-bold" href="#">
                     <h3 className="text-[18px] hover:text-green-700 line-clamp-1">
-                      {item?.title}
+                      {item?.heading}
                     </h3>
                   </a>
                   <div className="mt-3">

@@ -31,6 +31,28 @@ export default function Form() {
 
   const handleSubmit = async () => {
     try {
+      if (contacts?.name == "") {
+        return setErrors({ field: "name", message: "Trường này là bắt buộc" });
+      }
+      if (contacts?.address == "") {
+        return setErrors({
+          field: "address",
+          message: "Trường này là bắt buộc",
+        });
+      }
+      if (contacts?.email == "") {
+        return setErrors({ field: "email", message: "Trường này là bắt buộc" });
+      }
+      if (contacts?.phone == "") {
+        return setErrors({ field: "phone", message: "Trường này là bắt buộc" });
+      }
+      if (contacts?.content == "") {
+        return setErrors({
+          field: "content",
+          message: "Trường này là bắt buộc",
+        });
+      }
+
       const response = (
         await http({
           url: "contact",
@@ -51,7 +73,9 @@ export default function Form() {
         setErrors(response?.errors[0]);
       }
     } catch (error) {
-      alert("Gửi thất bại");
+      console.log(error);
+
+      // alert("Gửi thất bại");
     }
   };
   return (
@@ -61,54 +85,81 @@ export default function Form() {
           <div>
             <input
               value={contacts?.name}
-              onChange={(e: any) =>
-                setContacts((prev) => ({ ...prev, name: e.target.value }))
-              }
+              onChange={(e: any) => {
+                setErrors({ field: "", message: "" });
+                setContacts((prev) => ({ ...prev, name: e.target.value }));
+              }}
               placeholder="Họ và tên"
               type="text"
               className="w-full border-[1px] border-gray-300 rounded-md py-2 px-4 outline-none"
             />
+            {errors.field === "name" && (
+              <p className="text-red-500 text-sm">{errors.message}</p>
+            )}
           </div>
-          <input
-            value={contacts?.email}
-            onChange={(e: any) =>
-              setContacts((prev) => ({ ...prev, email: e.target.value }))
-            }
-            placeholder="Email"
-            type="text"
-            className="mt-3 w-full border-[1px] border-gray-300 rounded-md py-2 px-4 outline-none"
-          />
+          <div>
+            <input
+              value={contacts?.email}
+              onChange={(e: any) => {
+                setErrors({ field: "", message: "" });
+                setContacts((prev) => ({ ...prev, email: e.target.value }));
+              }}
+              placeholder="Email"
+              type="text"
+              className="mt-3 w-full border-[1px] border-gray-300 rounded-md py-2 px-4 outline-none"
+            />
+            {errors.field === "email" && (
+              <p className="text-red-500 text-sm">{errors.message}</p>
+            )}
+          </div>
         </div>
         <div className="lg:col-span-1">
-          <input
-            value={contacts?.address}
-            onChange={(e: any) =>
-              setContacts((prev) => ({ ...prev, address: e.target.value }))
-            }
-            placeholder="Địa chỉ"
-            type="text"
-            className="w-full border-[1px] border-gray-300 rounded-md py-2 px-4 outline-none"
-          />
-          <input
-            value={contacts?.phone}
-            onChange={(e: any) =>
-              setContacts((prev) => ({ ...prev, phone: e.target.value }))
-            }
-            placeholder="Điện thoại"
-            type="text"
-            className="mt-3 w-full border-[1px] border-gray-300 rounded-md py-2 px-4 outline-none"
-          />
+          <div>
+            <input
+              value={contacts?.address}
+              onChange={(e: any) => {
+                setErrors({ field: "", message: "" });
+                setContacts((prev) => ({ ...prev, address: e.target.value }));
+              }}
+              placeholder="Địa chỉ"
+              type="text"
+              className="w-full border-[1px] border-gray-300 rounded-md py-2 px-4 outline-none"
+            />
+            {errors.field === "address" && (
+              <p className="text-red-500 text-sm">{errors.message}</p>
+            )}
+          </div>
+          <div>
+            <input
+              value={contacts?.phone}
+              onChange={(e: any) => {
+                setErrors({ field: "", message: "" });
+                setContacts((prev) => ({ ...prev, phone: e.target.value }));
+              }}
+              placeholder="Điện thoại"
+              type="text"
+              className="mt-3 w-full border-[1px] border-gray-300 rounded-md py-2 px-4 outline-none"
+            />
+            {errors.field === "phone" && (
+              <p className="text-red-500 text-sm">{errors.message}</p>
+            )}
+          </div>
         </div>
       </div>
-      <textarea
-        value={contacts?.content}
-        onChange={(e: any) =>
-          setContacts((prev) => ({ ...prev, content: e.target.value }))
-        }
-        placeholder="Nội dung"
-        className="mt-3 w-full border-[1px] border-gray-300 rounded-md py-2 px-4 outline-none h-[150px]"
-        defaultValue={""}
-      />
+      <div>
+        <textarea
+          value={contacts?.content}
+          onChange={(e: any) => {
+            setErrors({ field: "", message: "" });
+            setContacts((prev) => ({ ...prev, content: e.target.value }));
+          }}
+          placeholder="Nội dung"
+          className="mt-3 w-full border-[1px] border-gray-300 rounded-md py-2 px-4 outline-none h-[150px]"
+        />
+        {errors.field === "content" && (
+          <p className="text-red-500 text-sm">{errors.message}</p>
+        )}
+      </div>
       <div className="mt-5 lg:flex">
         {/* <button className="lg:mr-5 w-full py-3 bg-gray-200 text-black rounded-sm">
           Capcha

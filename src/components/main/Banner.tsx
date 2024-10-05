@@ -13,10 +13,10 @@ export default async function Banner({ data }: Props) {
       }}
     >
       <div className="container mx-auto text-white">
-        <h1 className="lg:text-[40px] text-[25px] lg:w-[70%] font-bold leading-normal uppercase">
+        <h1 className="lg:text-[40px] text-[22px] lg:w-[70%] font-bold leading-normal uppercase">
           {data?.name}
         </h1>
-        <div className="lg:w-[600px] py-8">{data?.des}</div>
+        <div className="lg:w-[600px] py-8 lg:text-[18px]">{data?.des}</div>
         {/* <div className="lg:w-[600px] py-8">des</div> */}
         <div className="pt-8 flex">
           <a

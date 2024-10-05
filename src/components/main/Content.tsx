@@ -18,8 +18,11 @@ export default function Content({ dataTitle }: Props) {
 
   const getAll = async () => {
     try {
-      const res = (await http.get<SuccessResponse<[]>>("why-choose?limit=4"))
-        .data;
+      const res = (
+        await http.get<SuccessResponse<[]>>(
+          "why-choose?limit=4&publish=1&sort=1"
+        )
+      ).data;
       if (res.statusCode === 200) {
         setData(res.data);
       }
