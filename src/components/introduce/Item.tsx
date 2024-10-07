@@ -102,7 +102,7 @@ export default async function Item() {
           <div className="px-5 py-5 shadow-bottom-right overflow-hidden rounded-sm transition-transform duration-100 text-center">
             <div className="w-16 h-16 bg-greenCustom rounded-[100%] mx-auto flex justify-center items-center">
               <Image
-                alt=""
+                alt={item?.name}
                 width={645}
                 height={431}
                 src={`${urlImage}/${item?.image}`}

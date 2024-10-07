@@ -63,7 +63,7 @@ function Products() {
                         <Image
                           width={10}
                           height={10}
-                          alt=""
+                          alt={item?.name}
                           src={`${urlImage}/${item?.image}`}
                           className=" h-full w-full bg-white object-cover "
                         />

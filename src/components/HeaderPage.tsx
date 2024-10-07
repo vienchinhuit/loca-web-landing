@@ -164,7 +164,11 @@ export default function HeaderPage() {
             </div>
             <div className="ml-2 font-semibold">
               {dataMenu?.map((item: MenuItem, index) => (
-                <li key={index} className="hover:text-greenCustom my-3 mx-2">
+                <li
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  key={index}
+                  className="hover:text-greenCustom my-3 mx-2"
+                >
                   <Link className="ml-0 lg:ml-10" href={item?.link}>
                     {item?.name}
                   </Link>

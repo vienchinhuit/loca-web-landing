@@ -54,7 +54,7 @@ export default function Content({ dataTitle }: Props) {
                   <Image
                     width={16}
                     height={10}
-                    alt=""
+                    alt={item?.name}
                     src={`${urlImage}/${item?.image}`}
                     className="w-16"
                   />

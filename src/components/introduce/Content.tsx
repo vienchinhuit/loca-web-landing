@@ -12,7 +12,7 @@ export default async function Content() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 mt-5">
           <div className="lg:col-span-2">
             <Image
-              alt=""
+              alt="ve-chung-toi"
               width={645}
               height={431}
               src={`${urlImage}/${dataAbout?.image}`}

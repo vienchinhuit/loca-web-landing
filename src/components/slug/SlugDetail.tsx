@@ -37,9 +37,16 @@ function SlugDetail({ slug }: { slug: string }) {
     description: "",
     content: "",
   } as TContent);
+  const [category, setCategory] = useState({
+    title: "",
+    heading: "",
+    description: "",
+    content: "",
+  } as TContent);
   const [activeTab, setActiveTab] = useState("info");
   const [products, setProducts] = useState([]);
   const [news, setNews] = useState([]);
+  const [categoryRelated, setCategoryRelated] = useState([]);
 
   const getAllNews = async () => {
     try {
@@ -84,6 +91,13 @@ function SlugDetail({ slug }: { slug: string }) {
       if (ress.statusCode === 200) {
         return setContent(ress.data as unknown as TContent);
       }
+
+      const resss = (
+        await http.get<SuccessResponse<[]>>(`category/findBySlug/${slug}`)
+      ).data;
+      if (resss.statusCode === 200) {
+        return setCategory(resss.data as unknown as TContent);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -98,7 +112,7 @@ function SlugDetail({ slug }: { slug: string }) {
     getDetail(slug);
   }, [slug]);
 
-  if (!data?.name && !content?.title) {
+  if (!data?.name && !content?.heading && !category?.heading) {
     return <Loading />;
   }
   if (data?.name) {
@@ -111,7 +125,7 @@ function SlugDetail({ slug }: { slug: string }) {
               src={`${urlImage}/${data.image}`}
               width={100}
               height={100}
-              alt="GPS Tracker"
+              alt={data?.name}
             />
           </div>
           <div className="flex flex-col gap-5">
@@ -209,7 +223,7 @@ function SlugDetail({ slug }: { slug: string }) {
                             <Image
                               width={10}
                               height={10}
-                              alt=""
+                              alt={item.name}
                               src={`${urlImage}/${item.image}`}
                               className=" h-full w-full bg-white object-cover "
                             />
@@ -234,14 +248,18 @@ function SlugDetail({ slug }: { slug: string }) {
     );
   }
 
-  if (content?.title) {
+  if (content?.heading) {
     return (
       <div>
         <div className="flex flex-col gap-3 mb-5">
           <h1 className="text-[18px] font-bold text-greenDarkCustom">
             {content?.heading}
           </h1>
-          <p className="py-3 border-y-2 text-[15px] ">{content?.description}</p>
+          {content?.description && (
+            <p className="py-3 border-y-2 text-[15px] ">
+              {content?.description}
+            </p>
+          )}
         </div>
         <div
           className="content-news flex flex-col gap-5 text-lg font-normal"
@@ -270,7 +288,7 @@ function SlugDetail({ slug }: { slug: string }) {
                         <Image
                           width={100}
                           height={80}
-                          alt=""
+                          alt={item?.heading}
                           src={`${urlImage}/${item?.image_url}`}
                           className="w-full bg-white object-cover block"
                         />
@@ -294,6 +312,27 @@ function SlugDetail({ slug }: { slug: string }) {
             )}
           </div>
         </div>
+      </div>
+    );
+  }
+
+  if (category?.heading) {
+    return (
+      <div>
+        <div className="flex flex-col gap-3 mb-5">
+          <h1 className="text-[18px] font-bold text-greenDarkCustom">
+            {category?.heading}
+          </h1>
+          {category?.description && (
+            <p className="py-3 border-y-2 text-[15px] ">
+              {category?.description}
+            </p>
+          )}
+        </div>
+        <div
+          className="content-news flex flex-col gap-5 text-lg font-normal"
+          dangerouslySetInnerHTML={{ __html: category.content }}
+        />
       </div>
     );
   }

@@ -53,7 +53,7 @@ export default function News({ dataTitle }: Props) {
                     <Image
                       width={100}
                       height={80}
-                      alt=""
+                      alt={dataTitle?.name}
                       src={`${urlImage}/${item?.image_url}`}
                       className="w-full bg-white object-cover block"
                     />

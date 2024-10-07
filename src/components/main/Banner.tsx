@@ -1,5 +1,6 @@
 import { DataContent } from "@/types/type";
 import { urlImage } from "@/utils/http";
+import Link from "next/link";
 import React from "react";
 interface Props {
   data: DataContent;
@@ -19,18 +20,18 @@ export default async function Banner({ data }: Props) {
         <div className="lg:w-[600px] py-8 lg:text-[18px]">{data?.des}</div>
         {/* <div className="lg:w-[600px] py-8">des</div> */}
         <div className="pt-8 flex">
-          <a
-            href=""
+          <Link
+            href={data?.link}
             className="px-5 py-1 bg-yellow-600 rounded-md border-[1px] border-yellow-600 hover:bg-[#344352]"
           >
             Xem thêm
-          </a>
-          <a
-            href="/"
+          </Link>
+          <Link
+            href={data?.link}
             className="ml-5 px-5 py-1 border-[1px] border-yellow-600 rounded-md hover:bg-yellow-600"
           >
             Liên hệ chúng tôi
-          </a>
+          </Link>
         </div>
       </div>
     </div>

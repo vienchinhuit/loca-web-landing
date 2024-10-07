@@ -2,10 +2,14 @@
 import { DataContent } from "@/types/type";
 import { urlImage } from "@/utils/http";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 interface Props {
   data: DataContent;
 }
+// Web/app thân thiện
+
+// Với thiết kế đơn giản trực quan, dễ sử dụng, tối ưu hóa bố cục sẽ là điểm cộng lớn đối với các khách hàng trong việc quản lý giám sát.
 export default function Description({ data }: Props) {
   console.log(data);
 
@@ -18,17 +22,17 @@ export default function Description({ data }: Props) {
               {data?.name}
             </h2>
             <div className="lg:mr-16 my-8">{data?.des}</div>
-            <a
-              href="#"
+            <Link
+              href={data?.link}
               className="px-5 py-2 bg-yellow-600 rounded-md text-white border-[1px] border-yellow-600 hover:bg-white hover:text-black"
             >
               Xem thêm
-            </a>
+            </Link>
           </div>
           <div className="lg:col-span-1">
             {/* <img  alt="w-full" /> */}
             <Image
-              alt=""
+              alt={data?.name}
               src={`${urlImage}/${data?.image}`}
               width={656}
               height={438}
