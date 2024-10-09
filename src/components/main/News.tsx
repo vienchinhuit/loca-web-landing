@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 
 interface TItem {
   description: string;
-  heading: string;
+  name: string;
   content: string;
   image_url: string;
   slug: string;
@@ -62,7 +62,7 @@ export default function News({ dataTitle }: Props) {
                 <div className="overflow-hidden px-5 py-3">
                   <a className="text-greenDarkCustom font-bold" href="#">
                     <h3 className="text-[18px] hover:text-green-700 line-clamp-1">
-                      {item?.heading}
+                      {item?.name}
                     </h3>
                   </a>
                   <div className="mt-3">

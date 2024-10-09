@@ -40,13 +40,13 @@ export default function Content2({ dataTitle }: Props) {
         <div className="grid lg:grid-cols-4 grid-cols-2 lg:gap-5 gap-4 text-left lg:mt-10 md:mt-10 mt-5 mb-5">
           {data.map((item: TItem, index) => (
             <div key={index} className="col-span-1">
-              <div className="lg:m-2 lg:px-5 border-[1px] border-gray-100 overflow-hidden rounded-sm transition-transform duration-100">
+              <div className="lg:m-2 lg:px-5 overflow-hidden rounded-sm transition-transform duration-100">
                 <Image
                   width={100}
                   height={80}
                   alt={dataTitle?.name}
                   src={`${urlImage}/${item?.image}`}
-                  className="w-full lg:h-full"
+                  className="xl:w-full lg:w-full md:w-[80%] lg:h-full md:w-auto w-[120px] md:h-auto m-auto"
                 />
               </div>
             </div>

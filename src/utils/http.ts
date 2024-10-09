@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance } from "axios";
-// const urlApi = "http://192.168.2.22:3001/api";
-// const urlImage = "http://192.168.2.22:3001/uploads";
+// const urlApi = "http://sv.optechdemo.com:3002/api";
+// const urlImage = "http://sv.optechdemo.com:3002/uploads";
 const urlApi = "https://yowork.optech.vn:3002/api";
 const urlImage = "https://yowork.optech.vn:3002/uploads";
 

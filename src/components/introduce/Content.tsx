@@ -19,9 +19,9 @@ export default async function Content() {
               className="w-full"
             />
           </div>
-          <div className="lg:col-span-3">{dataAbout?.top}</div>
+          <div className="lg:col-span-3 text-justify">{dataAbout?.top}</div>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: dataAbout?.bottom }}></div>
+        <div className="text-justify" dangerouslySetInnerHTML={{ __html: dataAbout?.bottom }}></div>
       </div>
     );
   } catch (error) {

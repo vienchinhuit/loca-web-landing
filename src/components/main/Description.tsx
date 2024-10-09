@@ -21,13 +21,17 @@ export default function Description({ data }: Props) {
             <h2 className="text-greenDarkCustom font-bold lg:text-[30px] text-[25px] leading-[35px]">
               {data?.name}
             </h2>
-            <div className="lg:mr-16 my-8">{data?.des}</div>
-            <Link
-              href={data?.link}
-              className="px-5 py-2 bg-yellow-600 rounded-md text-white border-[1px] border-yellow-600 hover:bg-white hover:text-black"
-            >
-              Xem thêm
-            </Link>
+            <div className="lg:mr-16 my-8 text-justify">
+              {data?.des}
+            </div>
+            <div className="flex justify-center md:justify-start">
+              <Link
+                href={data?.link as string}
+                className="px-5 py-2 bg-yellow-600 rounded-md text-white border-[1px] border-yellow-600 hover:bg-white hover:text-black"
+              >
+                Xem thêm
+              </Link>
+            </div>
           </div>
           <div className="lg:col-span-1">
             {/* <img  alt="w-full" /> */}

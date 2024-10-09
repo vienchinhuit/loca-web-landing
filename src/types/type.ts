@@ -14,7 +14,11 @@ export interface DataContent {
   copyright?: string;
   des: string;
   image: string;
-  link: string;
+  link?: string;
+  link_1?: string | undefined;
+  link_2?: string | undefined;
+  text_link_1?: string | undefined;
+  text_link_2?: string | undefined;
   thumb: string;
 }
 export interface TMainMenu {

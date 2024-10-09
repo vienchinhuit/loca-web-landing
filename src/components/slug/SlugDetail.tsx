@@ -18,7 +18,7 @@ interface TData {
 
 interface TContent {
   title: string;
-  heading: string;
+  name: string;
   description: string;
   content: string;
 }
@@ -33,13 +33,13 @@ function SlugDetail({ slug }: { slug: string }) {
   } as TData);
   const [content, setContent] = useState({
     title: "",
-    heading: "",
+    name: "",
     description: "",
     content: "",
   } as TContent);
   const [category, setCategory] = useState({
     title: "",
-    heading: "",
+    name: "",
     description: "",
     content: "",
   } as TContent);
@@ -112,7 +112,7 @@ function SlugDetail({ slug }: { slug: string }) {
     getDetail(slug);
   }, [slug]);
 
-  if (!data?.name && !content?.heading && !category?.heading) {
+  if (!data?.name && !content?.name && !category?.name) {
     return <Loading />;
   }
   if (data?.name) {
@@ -248,12 +248,12 @@ function SlugDetail({ slug }: { slug: string }) {
     );
   }
 
-  if (content?.heading) {
+  if (content?.name) {
     return (
       <div>
         <div className="flex flex-col gap-3 mb-5">
           <h1 className="text-[18px] font-bold text-greenDarkCustom">
-            {content?.heading}
+            {content?.name}
           </h1>
           {content?.description && (
             <p className="py-3 border-y-2 text-[15px] ">
@@ -273,7 +273,7 @@ function SlugDetail({ slug }: { slug: string }) {
                 item: {
                   slug: string;
                   image_url: string;
-                  heading: string;
+                  name: string;
                   description: string;
                 },
                 index
@@ -288,7 +288,7 @@ function SlugDetail({ slug }: { slug: string }) {
                         <Image
                           width={100}
                           height={80}
-                          alt={item?.heading}
+                          alt={item?.name}
                           src={`${urlImage}/${item?.image_url}`}
                           className="w-full bg-white object-cover block"
                         />
@@ -297,7 +297,7 @@ function SlugDetail({ slug }: { slug: string }) {
                     <div className="overflow-hidden px-5 py-3">
                       <a className="text-greenDarkCustom font-bold" href="#">
                         <h3 className="text-[22px] hover:text-green-700 line-clamp-1">
-                          {item?.heading}
+                          {item?.name}
                         </h3>
                       </a>
                       <div className="mt-5">
@@ -316,12 +316,12 @@ function SlugDetail({ slug }: { slug: string }) {
     );
   }
 
-  if (category?.heading) {
+  if (category?.name) {
     return (
       <div>
         <div className="flex flex-col gap-3 mb-5">
           <h1 className="text-[18px] font-bold text-greenDarkCustom">
-            {category?.heading}
+            {category?.name}
           </h1>
           {category?.description && (
             <p className="py-3 border-y-2 text-[15px] ">

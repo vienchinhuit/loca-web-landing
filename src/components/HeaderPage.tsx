@@ -98,7 +98,7 @@ export default function HeaderPage() {
                 height={10}
                 alt=""
                 src="./images/fb.png"
-                className="w-2 h-4 ml-4"
+                className="w-[25px] h-[25px] ml-4"
               />
             </Link>
             <Link target="_blank" href={dataContacts?.zalo}>
@@ -107,7 +107,7 @@ export default function HeaderPage() {
                 height={10}
                 alt=""
                 src="./images/zalo.png"
-                className="w-4 h-4 ml-4"
+                className="w-[20px] h-[20px] ml-4"
               />
             </Link>
             <Link target="_blank" href={dataContacts?.youtube}>
@@ -116,7 +116,7 @@ export default function HeaderPage() {
                 height={10}
                 alt=""
                 src="./images/yt.png"
-                className="w-4 h-4 ml-4"
+                className="w-[25px] h-[25px] ml-4"
               />
             </Link>
           </div>

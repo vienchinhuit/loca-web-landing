@@ -1,12 +1,31 @@
 import Content from "@/components/introduce/Content";
 import Item from "@/components/introduce/Item";
+import { http, urlImage } from "@/utils/http";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-export default function Introduce() {
+export default async function Introduce() {
+  const res = (await http.get("/system?key=ABOUT"))?.data;
+  // (await http.get("http://192.168.2.24:3001/api/v1/system?key=ABOUT"))?.data;
+  const dataAbout = res.data[0]?.content;
+
+  console.log(dataAbout);
+
+
   return (
     <div>
-      <div className="breadcrumb bg-grayCustom">
+      {dataAbout?.banner && (
+        <Image
+          className="mb-6"
+          src={`${urlImage}/${dataAbout?.banner}`}
+          // src={`http://192.168.2.24:3001/uploads/${dataAbout?.banner}`}
+          width={100}
+          height={200}
+          alt={dataAbout?.name}
+        />
+      )}
+      <div className="breadcrumb bg-grayCustom ">
         <div className="container lg:py-1 flex">
           <div className="py-2 font-bold flex items-center">
             <span className="mb-1">

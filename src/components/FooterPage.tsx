@@ -102,7 +102,7 @@ export default function FooterPage() {
   return (
     <footer className="footer bg-greenCustom text-white">
       <div className="container">
-        <div className="lg:grid md:grid lg:grid-cols-6 md:grid-cols-6 gap-10 py-7">
+        <div className="lg:grid md:grid lg:grid-cols-5 md:grid-cols-5 gap-10 py-7">
           <ul className="lg:col-span-2 md:col-span-2">
             <li className="w-full">
               <Image
@@ -127,29 +127,15 @@ export default function FooterPage() {
               className="lg:col-span-1 lg:mt-12 md:col-span-1 md:mt-12 mt-5"
             >
               <li className="my-1">
-                <div className="font-bold text-[15px]">{item?.name}</div>
+                <div className="font-bold text-[16px] uppercase mb-2">{item?.name}</div>
               </li>
               {item?.children?.map((it, id) => (
                 <li key={id} className="my-1 hover:text-gray-300">
-                  <Link href={it?.link || "#"}>{it?.name}</Link>
+                  <Link href={it?.link || "#"}>- {it?.name}</Link>
                 </li>
               ))}
             </ul>
           ))}
-          <div className="lg:col-span-2 md:col-span-2">
-            {/* {dataContacts?.google_map} */}
-            <div
-              dangerouslySetInnerHTML={{ __html: googleMapFooter as string }}
-            />
-            {/* <iframe
-              src={dataContacts?.google_map}
-              className="w-full h-full mr-5 md:mt-0 mt-5"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            /> */}
-          </div>
         </div>
         <div className="w-full h-[1px] bg-white" />
         <div className="pt-3 pb-7">
@@ -158,38 +144,38 @@ export default function FooterPage() {
             <div className="flex md:mt-0 mt-2">
               <Link target="_blank" href={dataContacts?.facebook}>
                 <Image
-                  width={2}
-                  height={4}
-                  alt=""
+                  width={10}
+                  height={10}
+                  alt="facebook"
                   src="./images/fb.png"
-                  className="w-2 h-4 lg:ml-4"
+                  className="w-[30px] h-[30px] lg:ml-4"
                 />
               </Link>
-              <Link target="_blank" href={dataContacts?.zalo}>
+              <Link target="_blank" href={`https://zalo.me/${dataContacts?.zalo}`}>
                 <Image
-                  width={2}
-                  height={4}
-                  alt=""
+                  width={10}
+                  height={10}
+                  alt="zalo"
                   src="./images/zalo.png"
-                  className="w-4 h-4 ml-4"
+                  className="w-[26px] h-[26px] ml-4"
                 />
               </Link>
               <Link target="_blank" href={dataContacts?.youtube}>
                 <Image
                   width={2}
                   height={4}
-                  alt=""
+                  alt="youtube"
                   src="./images/yt.png"
-                  className="w-4 h-4 ml-4"
+                  className="w-[30px] h-[30px] ml-4 "
                 />
               </Link>
-              <Link target="_blank" href={dataContacts?.tiktok}>
+              <Link className="rounded-[50px]" target="_blank" href={dataContacts?.tiktok}>
                 <Image
                   width={2}
                   height={4}
-                  alt=""
+                  alt="tiktok"
                   src="./images/tiktok.png"
-                  className="w-3 h-4 ml-4"
+                  className="w-[30px] h-[30px] ml-4"
                 />
               </Link>
             </div>

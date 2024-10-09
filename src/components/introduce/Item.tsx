@@ -89,29 +89,31 @@ interface TData {
 
 export default async function Item() {
   const resArrayAbout = (
-    await http.get<SuccessResponse<TData[]>>("about?sort=1&publish=1")
+    await http.get<SuccessResponse<TData[]>>("about?sort=1&publish=1&limit=4&page=1")
   ).data;
+
+  console.log(resArrayAbout);
+
   return (
     <div className="pt-10 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 mb-5">
       {resArrayAbout?.data?.map((item, index) => (
-        <Link
-          key={index}
-          href="/vi-sao-chon-chung-toi"
-          className="lg:col-span-1"
-        >
-          <div className="px-5 py-5 shadow-bottom-right overflow-hidden rounded-sm transition-transform duration-100 text-center">
-            <div className="w-16 h-16 bg-greenCustom rounded-[100%] mx-auto flex justify-center items-center">
-              <Image
-                alt={item?.name}
-                width={645}
-                height={431}
-                src={`${urlImage}/${item?.image}`}
-                className="w-8"
-              />
+        <Link key={index} href="#" className="lg:col-span-1">
+          <div key={index} className="lg:col-span-1">
+            <div className="px-5 py-10 shadow-bottom-right overflow-hidden rounded-sm transition-transform duration-100">
+              <div className="h-16">
+                <Image
+                  width={16}
+                  height={10}
+                  alt={item?.name}
+                  src={`${urlImage}/${item?.image}`}
+                  className="w-16"
+                />
+              </div>
+              <h3 className="my-2 text-greenDarkCustom font-bold text-[18px]">
+                {item?.name}
+              </h3>
+              <div className="text-gray-500 line-clamp-6">{item?.des}</div>
             </div>
-            <h3 className="mt-5 text-greenDarkCustom font-bold text-[20px]">
-              {item?.name}
-            </h3>
           </div>
         </Link>
       ))}

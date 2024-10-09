@@ -62,7 +62,7 @@ export default function Content({ dataTitle }: Props) {
                 <h3 className="my-2 text-greenDarkCustom font-bold text-[18px]">
                   {item?.name}
                 </h3>
-                <div className="text-gray-500 line-clamp-6">{item?.des}</div>
+                <div className="text-gray-500 line-clamp-6 text-justify">{item?.des}</div>
               </div>
             </div>
           ))}
