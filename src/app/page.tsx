@@ -8,24 +8,9 @@ import Content2 from "../components/main/Content2";
 import { TBanner, DataContent, SuccessResponse } from "../types/type";
 import Loading from "@/components/Loading";
 import Products from "@/components/main/Products";
-import { http, urlImage } from "@/utils/http";
+import { http } from "@/utils/http";
 import ErrorPage from "@/components/ErorrPage";
-import Link from "next/link";
-import Image from "next/image";
-interface TDataContacts {
-  address: string;
-  email: string;
-  facebook: string;
-  tiktok: string;
-  youtube: string;
-  zalo: string;
-  image: string;
-  name: string;
-  phone: number;
-  tax_code: number;
-  thumb: string;
-  google_map: string;
-}
+
 export default async function Home() {
   try {
     const res = (
@@ -59,20 +44,13 @@ export default async function Home() {
       (item: TBanner<DataContent>) => item.key === "PARTNER"
     )?.content;
 
-    const resContact = (await http.get<SuccessResponse<[]>>(`system`)).data;
-    let data = {} as TDataContacts;
 
-    resContact.data.forEach((item: { key: string; content: {} }) => {
-      if (item.key == "SOCIAL" || item.key == "CONTACT") {
-        data = { ...data, ...item.content };
-      }
-    });
 
     if (!dataBanner) {
       return <Loading />;
     }
     return (
-      <div className="main mb-10">
+      <div className="main">
         <Banner data={dataBanner} />
         {/*  */}
         <Products />
@@ -89,18 +67,7 @@ export default async function Home() {
         {/*  */}
         <News dataTitle={dataNews as DataContent} />
 
-        <div className="sticky bottom-40 z-10 ml-auto lg:mr-10 mr-5  w-12 h-12  rounded-full flex items-center justify-center">
-          <span className="animate-ping absolute inline-flex w-12 h-12 rounded-full bg-sky-400 "></span>
-          <Link href={`https://zalo.me/${data?.zalo}`} className="z-10" target="_blank">
-            <Image
-              src={`${urlImage}/files/support.png`}
-              className="w-12 h-12 animate-ring"
-              alt="support"
-              width={100}
-              height={100}
-            />
-          </Link>
-        </div>
+
       </div>
     );
   } catch (error) {
