@@ -8,19 +8,15 @@ export default async function Content() {
     const dataAbout = res.data[0].content;
 
     return (
-      <div className="content">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-5 mt-5">
-          <div className="lg:col-span-2">
-            <Image
-              alt="ve-chung-toi"
-              width={645}
-              height={431}
-              src={`${urlImage}/${dataAbout?.image}`}
-              className="w-full"
-            />
-          </div>
-          <div className="lg:col-span-3 text-justify">{dataAbout?.top}</div>
-        </div>
+      <div className="content gap-4 flex flex-col">
+        <Image
+          alt="ve-chung-toi"
+          width={645}
+          height={431}
+          src={`${urlImage}/${dataAbout?.image}`}
+          className="w-full"
+        />
+        <div className="lg:col-span-3 text-justify">{dataAbout?.top}</div>
         <div className="text-justify" dangerouslySetInnerHTML={{ __html: dataAbout?.bottom }}></div>
       </div>
     );
