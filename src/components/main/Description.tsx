@@ -11,8 +11,6 @@ interface Props {
 
 // Với thiết kế đơn giản trực quan, dễ sử dụng, tối ưu hóa bố cục sẽ là điểm cộng lớn đối với các khách hàng trong việc quản lý giám sát.
 export default function Description({ data }: Props) {
-  console.log(data);
-
   return (
     <div className="lg:py-20 md:py-20 py-10">
       <div className="container">
@@ -26,7 +24,7 @@ export default function Description({ data }: Props) {
             </div>
             <div className="flex justify-center md:justify-start">
               <Link
-                href={data?.link as string}
+                href={data?.link || "#" as string}
                 className="px-5 py-2 bg-yellow-600 rounded-md text-white border-[1px] border-yellow-600 hover:bg-white hover:text-black"
               >
                 Xem thêm

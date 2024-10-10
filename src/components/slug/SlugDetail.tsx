@@ -138,17 +138,15 @@ function SlugDetail({ slug }: { slug: string }) {
           <div className="flex gap-4 flex-col p-5 pt-2 rounded-lg bg-white shadow-md ">
             <div className="flex md:text-lg text-sm font-medium border-b-[3px] relative">
               <button
-                className={`py-2 pr-4 text-left w-[195px] ${
-                  activeTab === "info" ? "text-[#0aca57]" : ""
-                }`}
+                className={`py-2 pr-4 text-left w-[195px] ${activeTab === "info" ? "text-[#0aca57]" : ""
+                  }`}
                 onClick={() => setActiveTab("info")}
               >
                 Thông tin sản phẩm
               </button>
               <button
-                className={`py-2 pr-4 text-left w-[195px] ${
-                  activeTab === "tech" ? "text-[#0aca57]" : ""
-                }`}
+                className={`py-2 pr-4 text-left w-[195px] ${activeTab === "tech" ? "text-[#0aca57]" : ""
+                  }`}
                 onClick={() => setActiveTab("tech")}
               >
                 Thông số kỹ thuật
@@ -156,13 +154,12 @@ function SlugDetail({ slug }: { slug: string }) {
               <div
                 className="md:w-[165px] w-[130px] h-[3px] bg-[#0aca57] absolute -bottom-[2px] left-0"
                 style={{
-                  transform: `translateX(${
-                    activeTab === "info"
-                      ? 0
-                      : window.screen.width < 500
+                  transform: `translateX(${activeTab === "info"
+                    ? 0
+                    : window.screen.width < 500
                       ? 150
                       : 190
-                  }px)`,
+                    }px)`,
                   transition: "transform 0.2s",
                 }}
               />
@@ -216,7 +213,7 @@ function SlugDetail({ slug }: { slug: string }) {
                   index
                 ) => (
                   <SwiperSlide key={index}>
-                    <Link href={item.slug}>
+                    <Link href={item.slug || "#" as string}>
                       <div className="overflow-hidden rounded-lg shadow-lg overflow-hidden bg-white transition-transform duration-100 translate-y-[-0.04rem] shadow-md">
                         <div className="h-[230px] w-full overflow-hidden">
                           <div className="image h-[230px]">
@@ -278,7 +275,7 @@ function SlugDetail({ slug }: { slug: string }) {
                 },
                 index
               ) => (
-                <Link key={index} href={item?.slug}>
+                <Link key={index} href={item?.slug || "#" as string}>
                   <div
                     key={index}
                     className="lg:col-span-1 border-[2px] overflow-hidden md:max-w-[330px] lg:max-w-full"

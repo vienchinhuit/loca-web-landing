@@ -35,7 +35,7 @@ export default async function RootLayout({
             href="https://cdn-uicons.flaticon.com/2.3.0/uicons-solid-rounded/css/uicons-solid-rounded.css"
           ></link>
         </head>
-        <body className="text-[14px]">
+        <body className="text-[14px]" suppressHydrationWarning={true}>
           <HeaderPage />
           {children}
           <FooterPage />

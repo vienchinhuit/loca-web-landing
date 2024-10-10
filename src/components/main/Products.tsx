@@ -56,7 +56,7 @@ function Products() {
           >
             {products.map((item: TItem, index) => (
               <SwiperSlide key={index}>
-                <Link href={item?.slug}>
+                <Link href={item?.slug || "#" as string}>
                   <div className="overflow-hidden rounded-sm bg-white transition-transform duration-100 translate-y-[-0.04rem] shadow-md">
                     <div className="h-[230px] w-full overflow-hidden">
                       <div className="image h-[230px]">

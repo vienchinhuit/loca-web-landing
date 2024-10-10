@@ -46,7 +46,7 @@ export default function News({ dataTitle }: Props) {
         </h2>
         <div className="gap-5 grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 mt-10 ">
           {data?.map((item: TItem, index) => (
-            <Link key={index} href={item?.slug}>
+            <Link key={index} href={item?.slug || "#" as string}>
               <div className=" border-[2px] overflow-hidden">
                 <div className="h-[250px] overflow-hidden relative w-full">
                   <div className="image overflow-hidden ">

@@ -89,10 +89,10 @@ interface TData {
 
 export default async function Item() {
   const resArrayAbout = (
-    await http.get<SuccessResponse<TData[]>>("about?sort=1&publish=1&limit=4&page=1")
+    await http.get<SuccessResponse<TData[]>>(
+      "about?sort=1&publish=1&limit=4&page=1"
+    )
   ).data;
-
-  console.log(resArrayAbout);
 
   return (
     <div className="pt-10 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5 mb-5">

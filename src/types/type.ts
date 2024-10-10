@@ -15,6 +15,7 @@ export interface DataContent {
   des: string;
   image: string;
   link?: string;
+  banner_mobile?: string;
   link_1?: string | undefined;
   link_2?: string | undefined;
   text_link_1?: string | undefined;

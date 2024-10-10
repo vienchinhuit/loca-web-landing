@@ -89,17 +89,18 @@ export default async function Home() {
         {/*  */}
         <News dataTitle={dataNews as DataContent} />
 
-        {/* <div className="sticky bottom-40 z-10 ml-auto lg:mr-10 mr-5  w-12 h-12 overflow-hidden rounded-full">
-          <Link href={data?.zalo}>
+        <div className="sticky bottom-40 z-10 ml-auto lg:mr-10 mr-5  w-12 h-12  rounded-full flex items-center justify-center">
+          <span className="animate-ping absolute inline-flex w-12 h-12 rounded-full bg-sky-400 "></span>
+          <Link href={`https://zalo.me/${data?.zalo}`} className="z-10" target="_blank">
             <Image
               src={`${urlImage}/files/support.png`}
-              className="w-12 h-12"
+              className="w-12 h-12 animate-ring"
               alt="support"
               width={100}
               height={100}
             />
           </Link>
-        </div> */}
+        </div>
       </div>
     );
   } catch (error) {

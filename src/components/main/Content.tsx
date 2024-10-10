@@ -35,8 +35,6 @@ export default function Content({ dataTitle }: Props) {
     getAll();
   }, []);
 
-  console.log("dataTitle", dataTitle);
-
   return (
     <div className="lg:py-20 md:py-20 py-10">
       <div className="container items-center justify-center text-center">

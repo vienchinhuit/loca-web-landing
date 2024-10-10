@@ -17,7 +17,7 @@ export default function System({ dataTitle }: Props) {
 
   const getAll = async () => {
     try {
-      const res = (await http.get<SuccessResponse<[]>>("branch?sort=1")).data;
+      const res = (await http.get<SuccessResponse<[]>>("branch?sort=1&publish=1")).data;
       const resGGMapBrand = (
         await http.get<SuccessResponse<TBanner<DataContent>[]>>(
           "system?key=CONTACT"

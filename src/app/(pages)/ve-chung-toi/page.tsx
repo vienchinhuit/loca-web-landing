@@ -10,9 +10,6 @@ export default async function Introduce() {
   // (await http.get("http://192.168.2.24:3001/api/v1/system?key=ABOUT"))?.data;
   const dataAbout = res.data[0]?.content;
 
-  console.log(dataAbout);
-
-
   return (
     <div>
       {dataAbout?.banner && (

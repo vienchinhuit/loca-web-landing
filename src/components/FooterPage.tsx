@@ -142,7 +142,7 @@ export default function FooterPage() {
           <div className="md:justify-between md:flex">
             <div>{copyright}</div>
             <div className="flex md:mt-0 mt-2">
-              <Link target="_blank" href={dataContacts?.facebook}>
+              <Link target="_blank" href={dataContacts?.facebook || '#'}>
                 <Image
                   width={10}
                   height={10}
@@ -160,7 +160,7 @@ export default function FooterPage() {
                   className="w-[26px] h-[26px] ml-4"
                 />
               </Link>
-              <Link target="_blank" href={dataContacts?.youtube}>
+              <Link target="_blank" href={dataContacts?.youtube || '#'}>
                 <Image
                   width={2}
                   height={4}
@@ -169,7 +169,7 @@ export default function FooterPage() {
                   className="w-[30px] h-[30px] ml-4 "
                 />
               </Link>
-              <Link className="rounded-[50px]" target="_blank" href={dataContacts?.tiktok}>
+              <Link className="rounded-[50px]" target="_blank" href={dataContacts?.tiktok || '#'}>
                 <Image
                   width={2}
                   height={4}
